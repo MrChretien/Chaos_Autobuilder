@@ -14,32 +14,6 @@ import javafx.scene.layout.StackPane;
 
 public class AutoStage{
 	
-	ObservableList<String> states = 
-		    FXCollections.observableArrayList(
-		        "forward",
-		        "right",
-		        "shoot",
-		        "wait",
-		        "retract",
-		        "follow",
-		        "none",
-		        "passBall",
-		        "intakeDrive",
-		        "timeDrive",
-		        "reverseTimeDrive"
-		    );
-	
-	ObservableList<String> conditions = 
-		    FXCollections.observableArrayList(
-		        "distance",
-		        "distanceAngle",
-		        //"angle",
-		        "time",
-		        "gearout",
-		        "springin",
-		        "none"
-		    );
-	
 	private ComboBox stateBox;
 	private ComboBox conditionBox;
 	
@@ -50,9 +24,7 @@ public class AutoStage{
 	
 	private boolean toBeOff;
 	
-	public AutoStage (int stage, ArrayList <AutoStage> stages, StackPane layout) {
-		
-		
+	public AutoStage (int stage, ArrayList <AutoStage> stages, StackPane layout, ObservableList<String> states, ObservableList<String> conditions) {
 		
 		// instantiation
 		toBeOff = false;
@@ -63,26 +35,28 @@ public class AutoStage{
 		
 		delete = new Button ();
 		delete.setText("delete");
-		delete.setTranslateX(160);
+		delete.setTranslateX(265);
 		
 		conditionBox = new ComboBox (conditions);
-		conditionBox.setTranslateX(-40);
+		conditionBox.setTranslateX(70);
 		conditionBox.setPromptText("Condition");
+		conditionBox.setMaxWidth(100);
 		
 		stateBox = new ComboBox (states);
 		stateBox.setTranslateX(-150);
 		stateBox.setPromptText("State");
+		stateBox.setMaxWidth(100);
 		
 		conditionValue = new TextField ();
-		conditionValue.setPromptText("value");
+		conditionValue.setPromptText("condition value");
 		conditionValue.setPrefWidth(1);
-		conditionValue.setTranslateX(80);
+		conditionValue.setTranslateX(180);
 		conditionValue.setMaxWidth(100);
 		
 		stateValue = new TextField ();
-		stateValue.setPromptText("value");
+		stateValue.setPromptText("state value");
 		stateValue.setPrefWidth(1);
-		stateValue.setTranslateX(80);
+		stateValue.setTranslateX(-40);
 		stateValue.setMaxWidth(100);
 		
 		delete.setOnAction(new EventHandler<ActionEvent>() {
@@ -92,7 +66,6 @@ public class AutoStage{
 				try {
 					if (event.getSource() == delete) {
 						toBeOff = true;
-						
 						
 						int y = 1;
 						for (AutoStage x : stages) {
@@ -145,12 +118,12 @@ public class AutoStage{
 		return Integer.parseInt(stageNumber.getText().substring(stageNumber.getText().length() - 1));
 	}
 	
-	public void setStageInfo (int autoNumber, String state, float stateValueNumber, String condition, float conditionValueNumber) {
+	public void setStageInfo (int autoNumber, String state, String stateValueString, String condition, String conditionValueString) {
 		stageNumber.setText("Auto Stage " + autoNumber);
 		stateBox.getSelectionModel().select(state);
 		conditionBox.getSelectionModel().select(condition);
-		conditionValue.setText(Double.toString(conditionValueNumber));
-		stateValue.setText(Double.toString(stateValueNumber));
+		conditionValue.setText(conditionValueString);
+		stateValue.setText(stateValueString);
 	}
 	
 	public ComboBox getStateBox () {
