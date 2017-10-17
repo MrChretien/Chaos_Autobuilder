@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
-public class AutoStage{
+public class AutoStage {
 	
 	private ComboBox stateBox;
 	private ComboBox conditionBox;

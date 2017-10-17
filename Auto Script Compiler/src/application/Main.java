@@ -14,9 +14,10 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -39,20 +40,20 @@ public class Main extends Application{
 	ArrayList <AutoStage> stages;
 	
 	PrintWriter output;
+	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		
 		fileChooser = new FileChooser();
-		fileChooser.setInitialDirectory(new File ("C:\\Users\\CHAOS131\\Desktop\\CHAOS_Automodes"));
 		fileName = new TextField ();
 		fileName.setMaxWidth(200);
 		fileName.setPromptText("file name");
-		output = new PrintWriter("Unamed.ini", "UTF-8");
 		stages = new ArrayList <AutoStage>();
 		primaryStage.setTitle("Auto Script Compiler");
 		layout = new StackPane ();
-		info = new AutoInfo (layout);
+		info = new AutoInfo (layout, primaryStage);
 		Scene scene = new Scene (layout, 800, 900);
 
 		add = new Button ();
@@ -162,11 +163,11 @@ public class Main extends Application{
 		add.setTranslateY(0);
 		
 		load.setText("load");
-		load.setTranslateX(350);
+		load.setTranslateX(75);
 		load.setTranslateY(-300);
 		
 		make.setText("make");
-		make.setTranslateX(0);
+		make.setTranslateX(-75);
 		make.setTranslateY(-300);
 		
 		fileName.setTranslateX(0);
@@ -176,7 +177,7 @@ public class Main extends Application{
 		layout.getChildren().add(make);
 		layout.getChildren().add(fileName);
 		layout.getChildren().add(load);
-		
+				
 		primaryStage.setScene(scene);
 		primaryStage.show();
 		
